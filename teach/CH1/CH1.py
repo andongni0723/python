@@ -10,12 +10,24 @@
 # 印出 #
 #語法: print("你要說的句子")
 
+    #print("hi")
 
+    #say "hello"
+    #print("Hi")
 
 # 變數 #
 #語法: 變數名稱 = 值
 
+    # num = 5
+    # num02 = 2
+    # #print("5")
 
+    # print(num + num02) # print(5 + 2)
+
+#use two var to print 13
+x = 7
+y = 6
+print( x + y )
 
 # 資料型態 #
 
