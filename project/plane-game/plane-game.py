@@ -10,15 +10,15 @@ screen = pygame.display.set_mode((800,600))
 pygame.display.set_caption("plane")
 
 #set game icon
-icon = pygame.image.load("enemy.png")
+icon = pygame.image.load("player.png")
 pygame.display.set_icon(icon)
 
 #set game background
-bg= pygame.image.load("BG.png")
+bg= pygame.image.load("bg.png")
 
 #set game player
 player = pygame.image.load("player.png")
-playerX = 350
+playerX = 400
 playerY = 500
 playerspeed = 0
 
@@ -54,8 +54,8 @@ def distance(bx,by,ex,ey):
 class Bullet():
     def __init__(self):
         self.image = pygame.image.load("bullet.png")
-        self.x = playerX + 56
-        self.y = playerY - 10
+        self.x = playerX + 16
+        self.y = playerY + 10
         self.speed = 10
     
     # def hit():
@@ -103,8 +103,8 @@ def player_move():
     screen.blit(player,(playerX,playerY))
     playerX += playerspeed
     
-    if (playerX > 690):
-        playerX = 690
+    if (playerX > 736):
+        playerX = 736
     if (playerX < 0):
         playerX = 0
         

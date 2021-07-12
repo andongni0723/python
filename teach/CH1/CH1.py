@@ -28,41 +28,51 @@
         # y = 6
         # print( x + y )
 
-# 資料型態 #
+    # 資料型態 #
 
-#float , int
+    #float , int
 
+        # int01 = 2
+        # float01 = 2.5
 
+    # type 命令 #
+    # #語法: type(要確認的程式)
+    # print(type(1))
+    # #str
+    # str01 = "andongni"
+    # str02 = 'andongi02'
 
-#str
+    # #bool
+    # #boolen
+    # bool01 = True #0
+    # bool02 = False #1
 
+    #what is it?
+    # print(type(2330))     #int
+    # print(type(2330.510)) #float
+    # print(type(True))     #bool
+    # print(type("2000"))   #str
 
-
-#bool
-
-
+    #print( 2 + "0.") # 0
 
 # 輸入 #
 #語法: 變數名稱 = input("問題")
 
+# ques01 = input("is language is why? ")
 
-
- 
-
-# type 命令 #
-#語法: type(要確認的程式)
-
-
+# print(ques01)
 
 # 運算式 #
 
 # +  -  *  /
 
-
+# print(2 + 3 / 5) #
+# num01 = 1
+# num01 += 3
+# print(num01)
 
 # > < = (<= >=)
-
-
+ #
 
 # and or not 
 
