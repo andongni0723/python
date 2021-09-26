@@ -1,7 +1,7 @@
 #-----------------------#
-# data   : 2021/09/25   #
+# data   : 2021/09/26   #
 # github : andongni0723 #
-# video  : 36:50        #
+# video  : 1:18:35      #
 #-----------------------#
 import pygame
 import random
