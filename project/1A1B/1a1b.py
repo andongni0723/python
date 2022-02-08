@@ -8,6 +8,7 @@ import os
 
 # 創建 正確答案
 answerList = random.sample(range(10), 4)
+#print(answerList)
 
 # MAIN
 answerTime = 1
