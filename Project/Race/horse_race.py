@@ -1,6 +1,20 @@
-import random
+import random as r
 import time
 import os
+
+# Class
+class Player:
+    def __init__(self, index, name):
+        self.index = index
+        self.name = name
+        self.minSpeed = 5
+        self.maxSpeed = 15
+        self.speed = 0 
+        
+    def randomSpeed(self):
+       self.speed = r.randint(self.minSpeed, self.maxSpeed)
+
+
 
 MinBetMoney = 100
 inputDone = False
@@ -8,17 +22,17 @@ startMoney = 1000
 startPlayer = 6
 currentMoney = 1000
 betMoney = 0
-betPlayer = 1
-
-# Class
-class Horse:
-    def __init__(self, index, name, minSpeed, maxSpeed):
-        self.index = index
-        self.name = name
-        self.minSpeed = minSpeed
-        self.maxSpeed = maxSpeed
+betPlayer = 1    
+PlayerList = [[Player(1, "A"), 0], [Player(2, "B"), 0], [Player(3, "C"), 0], [Player(4, "D"), 0], [Player(5, "E"), 0], [Player(6, "F"), 0]] # [player data, run distance]
 
 # Funcation
+def INIT():
+    inputDone = False
+    currentMoney = 1000
+    betMoney = 0
+    betPlayer = 1    
+    PlayerList = [[Player(1, "A"), 0], [Player(2, "B"), 0], [Player(3, "C"), 0], [Player(4, "D"), 0], [Player(5, "E"), 0], [Player(6, "F"), 0]] # [player data, run distance]
+
 def GameText(_textTittle,_type = "None", _Min = 0, _Max = 1):  
     if(_textTittle == "mainMenu"):
         return "======沈奕瑋======\n"\
@@ -79,6 +93,10 @@ def GameText(_textTittle,_type = "None", _Min = 0, _Max = 1):
         return "============\n"\
                " GAME START \n"\
                "============\n"
+    elif(_textTittle == "rankListTop"):
+        return "==================================================\n"\
+               "Rank\t| No.\t|  Name\t| Speed (m/s)\t| Distance\n"\
+               "--------------------------------------------------"
     else:
         return "!!!GameTextError!!!"
 
@@ -90,37 +108,73 @@ def GemeMenuInput(_menuName: str, _type: str, _Min: int, _Max: int):
     inputDone = False
     print(GameText(_menuName))
 
+    # Check respond is standards compliant
     while not(inputDone):
         try:
-            respond = int(input(GameText(f"{_menuName}_input",_type, _Min, _Max)))           
+            respond = int(input(GameText(f"{_menuName}_input",_type, _Min, _Max)))    
+
         except :
             print(GameError("Input Error", f"{_type}, {_Min}~{_Max}"))
-        else:        
-            if(not(_Min <= respond <= _Max)):
+
+        else:
+            # Input Index Out of Range       
+            if(not(_Min <= respond <= _Max)): 
                 print(GameError("Index Out of Range", f"{_type}, {_Min}~{_Max}"))
                 continue
             inputDone = True
 
+    
     inputDone = False
     time.sleep(0.5)
-    os.system("cls")
+    os.system("cls") # Clear the CMD
     print()
     return respond
 
 n = 10
-a = "============================\n"\
-    "Rank | No. |  Name  | Speed \n"\
-    "----------------------------"
+
 def Race():
-    for i in range(11):
-        os.system("cls")
-        print(a)
-        print(f"{i}st. | 1.  | 1      | {20-i} m/s \n"\
-            "----------------------------")
-        print(f"{i+1}st. | 2.  | 2      | {15-i} m/s \n"\
-        "----------------------------\n")
-        print(f'[{"█"*i}{" "*(n-i)}] {i*100/n}%')
-        time.sleep(.5)
+    # INIT
+    isDone = False
+    PlayerList = [[Player(1, "A"), 0], [Player(2, "B"), 0], [Player(3, "C"), 0], [Player(4, "D"), 0], [Player(5, "E"), 0], [Player(6, "F"), 0]] # [player data, run distance]
+    RankList = []
+
+    while not(isDone): 
+        # Random players speed, and Calc players distance
+        for i in range(startPlayer):
+            PlayerList[i][0].randomSpeed()
+            PlayerList[i][1] += PlayerList[i][0].speed
+            RankList = sorted(PlayerList, key=lambda x: x[1], reverse=True)
+            print(i)
+        
+        # Output race rank
+        PrintRank(RankList)
+        time.sleep(0.5)
+
+        # the highest length is longer than 100, Race END
+        if(RankList[0][1] >= 100):
+            isDone = True
+
+            # Print Rank
+            st1, nd2 = f"{RankList[0][0].index}. {RankList[0][0].name}", f"{RankList[1][0].index}. {RankList[1][0].name}"
+            rd3 =  f"{RankList[2][0].index}. {RankList[2][0].name}" if(startPlayer > 2) else ""  # if only 2 players, the race hasn't 3rd 
+
+            print(f"         {st1}        \n"\
+                  f"        ======        \n"\
+                  f"  {nd2} |  1  |  {rd3}\n"\
+                  f"=======       ======= \n"\
+                  f"|   2           3   | \n"\
+                  f"--------------------- \n")
+
+def PrintRank(_RankList):
+    os.system("cls")
+    print(GameText("rankListTop"))
+    
+    for i in range(startPlayer):
+        print(f"{i+1}st.\t| {_RankList[i][0].index}\t| {_RankList[i][0].name}\t| {_RankList[i][0].speed} m/s \t| {_RankList[i][1]} m\n"\
+               "--------------------------------------------------")
+
+    print(f'[{"█"* (_RankList[0][1] // 2)}{" "* (50- (_RankList[0][1] // 2))}] {_RankList[0][1]}m')
+
 
 
 
@@ -155,8 +209,12 @@ while True:
             print(GameText("line"))
 
             ## Race ##  
-            Race() #TODO:Race
+            Race() 
+
+            # TODO: After race
         elif(respond_Menu == 3): ## Quit ##
             break
-    except:
+
+    except Exception as error:
+        print(error)
         print(GameError("Game Play Error", "None", "Don't click key during non-entering time"))
