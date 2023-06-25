@@ -1,0 +1,10 @@
+{
+    "configurations": [
+        {
+            "type": "python",
+            "name": "Python configuration",
+            "arguments": ["Project/plane-game/plane-game.py"],
+        },
+        
+    ]
+}

@@ -144,8 +144,7 @@ def Race():
             PlayerList[i][0].randomSpeed()
             PlayerList[i][1] += PlayerList[i][0].speed
             RankList = sorted(PlayerList, key=lambda x: x[1], reverse=True)
-            print(i)
-        
+
         # Output race rank
         PrintRank(RankList)
         time.sleep(0.5)
