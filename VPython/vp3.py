@@ -14,7 +14,7 @@
 # n = 0
 # thetaMax = 0
 # deg = 0
-# 
+#
 # distanceMax = 0
 #
 # while n <= 20:
